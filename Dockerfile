@@ -29,6 +29,7 @@ COPY --from=ts-build /user/src/app/yarn.lock .
 
 RUN yarn install --production=true
 
+##Stage 3
 FROM gcr.io/distroless/nodejs:latest@sha256:78ceb4615881ba1281b7c8a024befce00a97af6b022e38e09a30873eb544f430
 
 WORKDIR /usr/app
