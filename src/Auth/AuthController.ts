@@ -47,7 +47,7 @@ export const Login = async (req: Request, res: Response) => {
     }
 
     //@ts-ignore
-    const token = jwt.sign({ user: user.ADMIN }, config.jwtSecret);
+    const token = jwt.sign({ user: user.ADMIN }, config.jwtSecret, { expiresIn: config.jwtExpiresIn });
 
     return res.status(200).json({
       Status: "Success",
