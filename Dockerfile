@@ -28,7 +28,7 @@ FROM gcr.io/distroless/nodejs:latest@sha256:78ceb4615881ba1281b7c8a024befce00a97
 
 WORKDIR /usr/app
 
-COPY --from=ts-remover /usr/app/src ./
+COPY --from=ts-remover /usr/src/app ./
 
 USER 1000
 
