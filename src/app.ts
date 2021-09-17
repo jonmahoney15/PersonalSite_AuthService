@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import express from "express";
 import pinoHttp from "pino-http";
+import * as database from "./database/database";
 import { errorMiddleware, notFoundMiddleware } from "./util/error";
 import { logger } from "./util/logger";
 import { Router } from "./Routes/Router";
@@ -16,6 +17,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(pinoHttp({ logger }));
 
 app.use("/api", Router);
+
+database.connect();
 
 app.use([errorMiddleware, notFoundMiddleware]);
 

@@ -1,17 +1,14 @@
 import { Router } from "express";
-import { auth, verifyAdmin } from "../Middleware";
-import { AuthService } from "../services/AuthService";
-import { BlogService } from "../services/BlogService";
-import { ContactService } from "../services/ContactService";
+import { Register, Login, generateToken } from "../Auth/AuthController";
+import { auth, verifyAdmin, rateLimiter, largeLimiter } from "../Middleware";
 
 const router = Router();
 
-router.get("/Health", auth, verifyAdmin, (req, res) =>
-  res.send({ Status: "Success", message: "Gateway is Healthy" })
+router.get("/Auth/health", auth, verifyAdmin, (req, res) =>
+  res.send({ Status: "Success", message: "Auth is Healthy" })
 );
-
-router.use(AuthService);
-router.use(BlogService);
-router.use(ContactService);
+router.post("/Auth/Login", auth, rateLimiter, Login);
+router.post("/Auth/Register", auth, verifyAdmin, Register);
+router.get("/Auth/token", largeLimiter, generateToken);
 
 export { router as Router };

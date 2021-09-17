@@ -1,5 +1,5 @@
 build-dev:
-	docker build -t personal-site-api-gateway-dev -f Dockerfile.dev .
+	docker build -t personal-site-auth-api-dev -f Dockerfile.dev .
 
 build-prod: 
-	docker build -t personal-site-api-gateway-prod -f Dockerfile .
+	docker build -t personal-site-auth-api-prod -f Dockerfile .
