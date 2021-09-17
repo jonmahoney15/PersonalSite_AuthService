@@ -4,11 +4,11 @@ import { auth, verifyAdmin, rateLimiter, largeLimiter } from "../Middleware";
 
 const router = Router();
 
-router.get("/Auth/health", auth, verifyAdmin, (req, res) =>
-  res.send({ Status: "Success", message: "Auth is Healthy" })
+router.get("/auth/health", auth, verifyAdmin, (req, res) =>
+  res.status(200).json({ Status: "Success", message: "Auth is Healthy" })
 );
-router.post("/Auth/Login", auth, rateLimiter, Login);
-router.post("/Auth/Register", auth, verifyAdmin, Register);
-router.get("/Auth/token", largeLimiter, generateToken);
+router.post("/auth/login", auth, rateLimiter, Login);
+router.post("/auth/register", auth, verifyAdmin, Register);
+router.get("/auth/token", largeLimiter, generateToken);
 
 export { router as Router };
