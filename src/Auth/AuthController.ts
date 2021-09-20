@@ -39,15 +39,14 @@ export const Login = async (req: Request, res: Response) => {
 
     const password = loginAttempt.HashPassword;
     const isMatch = userLogin?.comparePassword(password);
-
+    
     if (!userLogin || !isMatch) {
       return res
         .status(401)
         .json({ Status: "Denied", message: "Email or password incorrect" });
     }
 
-    //@ts-ignore
-    const token = jwt.sign({ user: user.ADMIN }, config.jwtSecret, { expiresIn: config.jwtExpiresIn });
+    const token = jwt.sign({ user: user.ADMIN }, config.jwtSecret);
 
     return res.status(200).json({
       Status: "Success",
