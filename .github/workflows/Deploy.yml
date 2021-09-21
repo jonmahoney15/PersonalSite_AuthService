@@ -37,6 +37,6 @@ jobs:
           gcloud run deploy $SERVICE \
             --image gcr.io/$PROJECT_ID/$SERVICE_NAME:latest \
             --region $REGION \
-            --set-env-var $ENV_VAR \
+            --set-env-vars $ENV_VAR \
             --vpc-connector $CONNECTOR
             --allow-unauthenticated
