@@ -21,13 +21,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
+
       # Setup gcloud CLI
       - uses: google-github-actions/setup-gcloud@master
         with:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
-      
+
       # Build docker image
       - name: Image
         run: |-
