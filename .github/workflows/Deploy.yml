@@ -35,8 +35,9 @@ jobs:
       - name: Deploy to Cloud Run
         run: |-
           gcloud run deploy $SERVICE \
+            --project $PROJECT_ID \
             --image gcr.io/$PROJECT_ID/$SERVICE_NAME:latest \
             --region $REGION \
             --set-env-vars $ENV_VAR \
-            --vpc-connector $CONNECTOR
+            --vpc-connector $CONNECTOR \
             --allow-unauthenticated
