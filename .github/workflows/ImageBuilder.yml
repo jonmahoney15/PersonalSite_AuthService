@@ -34,20 +34,17 @@ jobs:
         with:
             install: true
 
-      # Build docker image
-      - name: Image
-        run: |-
-          docker build --platform=linux/amd64,linux/arm64 -t gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA .           
-     
       # Configure docker to use the gcloud command-line tool as a credential helper
       - run: |
           gcloud auth configure-docker -q
-          
-      # Push image to Google Container Registry
-      - name: Build
-        run: |-
-          docker push gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA
 
+      # Build docker image
+      - name: Image
+        run: |-
+            docker build --platform=linux/amd64,linux/arm64 \
+                         --output=type=registry,dest=gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA \
+                         -t gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA .           
+     
       - name: Set Latest
         run: |-
           gcloud container images add-tag gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA gcr.io/$PROJECT_ID/$SERVICE_NAME:latest
