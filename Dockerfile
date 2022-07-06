@@ -6,7 +6,7 @@ COPY ./package.json ./
 COPY ./tsconfig.json ./
 COPY ./yarn.lock ./
 
-RUN yarn install 
+RUN yarn install
 
 COPY src ./src
 
@@ -27,4 +27,4 @@ USER 1000
 
 EXPOSE 8080
 
-CMD ["node","index.js"]
+CMD ["node","Index.js"]

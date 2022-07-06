@@ -1,5 +1,5 @@
 import Mongoose from "mongoose";
-import { config } from "../config";
+import { config } from "../Config";
 
 let database: Mongoose.Connection;
 

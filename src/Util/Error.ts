@@ -1,7 +1,7 @@
 import boom from "@hapi/boom";
 import type { NextFunction, Request, Response } from "express";
 import pino from "pino";
-import { logger } from "./logger";
+import { logger } from "./Logger";
 
 export const handle = pino.final(logger, (err, finalLogger) => {
   finalLogger.fatal(err);

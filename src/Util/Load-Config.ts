@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
 import type { Schema } from "joi";
 
-import { handle } from "./error";
-import type { Env } from "../config";
+import { handle } from "./Error";
+import type { Env } from "../Config";
 
 export const loadConfig = (schema: Schema): Env => {
   dotenv.config({ path: __dirname + "/../../.env" });

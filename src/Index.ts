@@ -1,8 +1,8 @@
 import { createHttpTerminator } from "http-terminator";
-import { app } from "./app";
-import { config } from "./config";
-import { handle } from "./util/error";
-import { logger } from "./util/logger";
+import { app } from "./App";
+import { config } from "./Config";
+import { handle } from "./Util/Error";
+import { logger } from "./Util/Logger";
 
 process.on("unhandledRejection", err => {
   throw err;

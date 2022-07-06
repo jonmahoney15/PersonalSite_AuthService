@@ -38,6 +38,7 @@ jobs:
       - name: Image
         run: |-
           docker build --platform=linux/amd64,linux/arm64 -t gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA .           
+     
       # Configure docker to use the gcloud command-line tool as a credential helper
       - run: |
           gcloud auth configure-docker -q
