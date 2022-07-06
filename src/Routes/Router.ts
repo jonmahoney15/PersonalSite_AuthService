@@ -4,7 +4,7 @@ import { auth, verifyAdmin, rateLimiter } from "../Middleware";
 
 const router = Router();
 
-router.get("/auth/health", auth, verifyAdmin, (req, res) =>
+router.get("/auth/health", (req, res) =>
   res.status(200).json({ Status: "Success", message: "Auth is Healthy" })
 );
 
