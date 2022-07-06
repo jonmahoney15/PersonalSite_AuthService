@@ -23,8 +23,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # Setup gcloud CLI
-      - uses: google-github-actions/setup-gcloud@v0
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Setup gcloud cli
+        uses: google-github-actions/setup-gcloud@v0
         with:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
@@ -34,12 +37,11 @@ jobs:
         with:
             install: true
 
-      # Configure docker to use the gcloud command-line tool as a credential helper
-      - run: |
+      - name: Creds for GCP
+        run: |
           gcloud auth configure-docker -q
 
-      # Build docker image
-      - name: Image
+      - name: Build Images and Push to Registry
         run: |-
             docker build --platform=linux/amd64,linux/arm64 \
                          --output=type=registry,dest=gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA \
