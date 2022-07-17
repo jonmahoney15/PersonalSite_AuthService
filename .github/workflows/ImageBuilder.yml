@@ -63,5 +63,5 @@ jobs:
             platforms: linux/amd64,linux/arm64
             push: true
             tags: |
-                ${{ env.SERVICE_NAME }}:${{ steps.prep.outputs.BUILD_ID }}
+                gcr.io/${{ PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ steps.prep.outputs.BUILD_ID }}
 
