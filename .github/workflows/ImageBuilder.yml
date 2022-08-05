@@ -64,4 +64,3 @@ jobs:
             push: true
             tags: |
                 gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ steps.prep.outputs.BUILD_ID }}
-
