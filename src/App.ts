@@ -3,9 +3,9 @@ import cors from "cors";
 import helmet from "helmet";
 import express from "express";
 import pinoHttp from "pino-http";
-import * as database from "./database/database";
-import { errorMiddleware, notFoundMiddleware } from "./util/error";
-import { logger } from "./util/logger";
+import * as database from "./Database/Database";
+import { errorMiddleware, notFoundMiddleware } from "./Util/Error";
+import { logger } from "./Util/Logger";
 import { Router } from "./Routes/Router";
 
 const app = express();

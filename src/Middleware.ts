@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { config } from "./config";
-import * as User from "./enums/user";
+import { config } from "./Config";
+import * as User from "./Enums/User";
 import rateLimit from "express-rate-limit";
 
 export const auth = (req: Request, res: Response, next: NextFunction) => {

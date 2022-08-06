@@ -45,7 +45,7 @@ AdminSchema.pre("save", async function (next) {
     return next(error.message);
   }
 });
-
+// @ts-ignore
 AdminSchema.methods.comparePassword = function (plainPwd) {
   const user = this as IAdmin;
   return bcrypt.compareSync(plainPwd, user.HashPassword);

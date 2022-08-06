@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { Admin, IAdmin } from "./AdminModel";
 import jwt from "jsonwebtoken";
-import { user } from "../enums/user";
-import { config } from "../config";
+import { user } from "../Enums/User";
+import { config } from "../Config";
 
 export const Register = async (req: Request, res: Response) => {
   try {

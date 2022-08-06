@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-import { loadConfig } from "./util/load-config";
+import { loadConfig } from "./Util/Load-Config";
 
 export interface Env {
   NODE_ENV: "development" | "test" | "production";
