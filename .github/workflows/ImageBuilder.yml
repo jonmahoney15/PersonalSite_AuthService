@@ -21,23 +21,13 @@ jobs:
       PROJECT_ID: ${{ secrets.PROJECT_ID }}
 
     steps:
-      - name: Prepare
-        id: prep
-        run: |
-          BRANCH=${GITHUB_REF##*/}
-          TS=$(date +%s)
-          REVISION=${GITHUB_SHA::8}
-          BUILD_ID="${BRANCH}-${REVISION}-${TS}"
-          LATEST_ID=canary
-          if [[ $GITHUB_REF == refs/tags/* ]]; then
-            BUILD_ID=${GITHUB_REF/refs\/tags\//}
-            LATEST_ID=latest
-          fi
-          echo ::set-output name=BUILD_DATE::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-          echo ::set-output name=BUILD_ID::${BUILD_ID}
-          echo ::set-output name=LATEST_ID::${LATEST_ID}
-
       - uses: actions/checkout@v2
+
+      - name: Automated Version Bump
+        id: version-bump
+        uses: phips28/gh-action-bump-version@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -63,4 +53,5 @@ jobs:
             platforms: linux/amd64,linux/arm64
             push: true
             tags: |
-                gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ steps.prep.outputs.BUILD_ID }}
+                gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ steps.version-bump.outputs.newTag }}
+ 
