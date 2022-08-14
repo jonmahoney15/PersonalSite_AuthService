@@ -1,6 +1,6 @@
 {
   "name": "auth_server",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "main": "Index.js",
   "license": "MIT",
   "scripts": {
