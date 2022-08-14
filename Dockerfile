@@ -13,7 +13,7 @@ COPY src ./src
 RUN yarn build
 
 ##Stage 2
-FROM node:16-alpine@sha256:a2b99f95311def1095e5b9604a81956f4109d9a512a44c86fc382f472cad1d91
+FROM node:16-alpine
 
 WORKDIR /usr/src/app
 
