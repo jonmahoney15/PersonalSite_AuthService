@@ -41,20 +41,25 @@ jobs:
 
       - name: Creds for GCP
         run: |
-          gcloud auth configure-docker -q
-
-      - name: Build Image
+            gcloud auth configure-docker -q
+     
+      - name: Build Image Locally
         uses: docker/build-push-action@v3
-        with: 
-            platforms: linux/amd64, linux/arm64
-            push: false
+        with:
+            load: true 
             tags: |
-                gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ steps.version-bump.outputs.newTag }}
+                gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:local
 
       - name: Scan Image
         uses: Azure/container-scan@v0
         with:
-          image-name: gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ steps.version-bump.outputs.newTag }}
+          image-name: gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:local
+          
+      - name: Build Multi Image and Push
+        uses: docker/build-push-action@v3
+        with:
+            push: true
+            platforms: linux/amd64, linux/arm64
+            tags: |
+                gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ steps.version-bump.outputs.newTag }}
 
-      - name: Push Image 
-        run: docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ steps.version-bump.outputs.newTag }}
