@@ -54,6 +54,7 @@ jobs:
         uses: Azure/container-scan@v0
         with:
           image-name: gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:local
+          run-quality-checks: false
           
       - name: Build Multi Image and Push
         uses: docker/build-push-action@v3
